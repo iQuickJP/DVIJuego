@@ -1,0 +1,159 @@
+{
+  "frames": {
+    "general_3.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 45,
+        "h": 75
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 25.5,
+        "y": 15,
+        "w": 45,
+        "h": 75
+      },
+      "sourceSize": {
+        "w": 94.5,
+        "h": 97.5
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "general_2.png": {
+      "frame": {
+        "x": 0,
+        "y": 75,
+        "w": 33,
+        "h": 75
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31.5,
+        "y": 15,
+        "w": 33,
+        "h": 75
+      },
+      "sourceSize": {
+        "w": 94.5,
+        "h": 97.5
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "general_1.png": {
+      "frame": {
+        "x": 0,
+        "y": 150,
+        "w": 45,
+        "h": 72
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 25.5,
+        "y": 18,
+        "w": 45,
+        "h": 72
+      },
+      "sourceSize": {
+        "w": 94.5,
+        "h": 97.5
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "herrero_2.png": {
+      "frame": {
+        "x": 33,
+        "y": 75,
+        "w": 61.5,
+        "h": 70.5
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 3,
+        "y": 19.5,
+        "w": 61.5,
+        "h": 70.5
+      },
+      "sourceSize": {
+        "w": 94.5,
+        "h": 97.5
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "herrero_3.png": {
+      "frame": {
+        "x": 45,
+        "y": 0,
+        "w": 54,
+        "h": 70.5
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 25.5,
+        "y": 18,
+        "w": 54,
+        "h": 70.5
+      },
+      "sourceSize": {
+        "w": 94.5,
+        "h": 97.5
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "herrero_1.png": {
+      "frame": {
+        "x": 0,
+        "y": 222,
+        "w": 52.5,
+        "h": 69
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 25.5,
+        "y": 22.5,
+        "w": 52.5,
+        "h": 69
+      },
+      "sourceSize": {
+        "w": 94.5,
+        "h": 97.5
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "npc.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 99,
+      "h": 291
+    },
+    "scale": 1.5
+  }
+}
