@@ -24,6 +24,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('enemy', 'enemy_white.png');
     this.load.image('enemyBlack', 'enemy_black.png');
     this.load.image('flecha', 'flecha.png')
+    this.load.image('flecha2', 'flecha2.png')
     this.load.image('pocionVida', 'potion.png');
     this.load.image('monedas', 'coins.png');
     this.load.image('vida', 'Fullheart.png');
@@ -78,6 +79,11 @@ export default class Boot extends Phaser.Scene {
     this.load.image('larger','larger.png');
     this.load.image('smaller','smaller.png');
     this.load.image('question','question.png');
+    this.load.image('infoCartel', 'cartelPowerUp.jpg');
+    this.load.image('infoCartel1', 'cartelPowerUp1.png');
+    this.load.image('infoCartel2', 'cartelPowerUp2.png');
+    this.load.image('infoCartel3', 'cartelPowerUp3.png');
+    this.load.image('infoCartel4', 'cartelPowerUp4.png');
 
     this.load.setPath('assets/sprites/uiSprites');
     this.load.image('config', 'gear.png');
@@ -109,16 +115,17 @@ export default class Boot extends Phaser.Scene {
     this.load.image('tileSpaceR', 'tileSpaceR.png');
     this.load.image('ps4','ps4.png');
     
+    
 
     this.load.setPath('assets/json/');
     this.load.tilemapTiledJSON('tilemapJose', 'PruebaScrollJose.json');
     this.load.tilemapTiledJSON('tilemapVillage', 'PruebaPoblado2.json');
 
     this.load.setPath('assets/json/Scroll');
-    this.load.tilemapTiledJSON('Scroll1', 'scroll1.json');
+    this.load.tilemapTiledJSON('Scroll1', 'Scroll1.json');
     this.load.tilemapTiledJSON('Scroll2', 'Scroll2.json');
     this.load.tilemapTiledJSON('Scroll3', 'Scroll3.json');
-    this.load.tilemapTiledJSON('Scroll4', 'scroll4.json');
+    this.load.tilemapTiledJSON('Scroll4', 'Scroll4.json');
 
 
     this.load.setPath('assets/json/Dungeon 1');
@@ -264,6 +271,17 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('takePotion', 'takePotion.wav');
     this.load.audio('takeCoins', 'coins.wav');
     this.load.audio('winTheme', 'win.wav');
+    this.load.audio('bossTheme','bossTheme.wav');
+    this.load.audio('getHealth','getHealth.wav');
+    this.load.audio('throwSpell','throwSpell.wav');
+    this.load.audio('laugh', 'laugh.wav')
+    this.load.audio('laugh2', 'laugh2.wav')
+    this.load.audio('minotaurAppear','minotaurAppear.wav');
+    this.load.audio('minotaurDamage','minotaurDamage.wav');
+    this.load.audio('minotaurDeath1','minotaurDeath1.wav');
+    this.load.audio('minotaurDeath2','minotaurDeath2.wav');
+    this.load.audio('unlockDoor','unlockDoor.mp3');
+    this.load.audio('dash','dash.wav');
 
     //fuentes
     this.load.setPath('assets/fonts/');
@@ -271,23 +289,9 @@ export default class Boot extends Phaser.Scene {
     
   }
 
-  /**
-   * Creación de la escena. En este caso, solo cambiamos a la escena que representa el
-   * nivel del juego
-   */
   create() {
-    //Para probar enemigo descomentar esto y comentar el de abajo
-    //this.scene.start('lebel');
     this.createAnimations();
-    //Para jugar en el modo vista lateral descomentar level
     this.scene.start('mainMenu');
-    //this.scene.start('finalBoss', { playerData: new PlayerData(), levelList: [], powerUpList: [], direction: 0 })
-
-    //this.scene.start('Scroll1', {coordinates: {x: 100, y: 800}, playerData: new PlayerData()});
-    //this.scene.start('Scroll2', {coordinates: {x: 100, y: 4500}, playerData: new PlayerData()});
-    //this.scene.start('Scroll3', {coordinates: {x: 200, y: 1200}, playerData: new PlayerData()});
-    //this.scene.start('Scroll4', {coordinates: {x: 100, y: 500}, playerData: new PlayerData()});
-    //this.scene.start('level');
   }
 
   createAnimations() {
@@ -357,7 +361,7 @@ export default class Boot extends Phaser.Scene {
       repeat: -1
     })
 
-    // goblinKing animations
+    // GoblinKing
     this.anims.create({
       key: 'goblinKing_idle',
       frames: this.anims.generateFrameNames('goblinKing', { start: 1, end: 4, prefix: 'idle-', suffix: '.png' }),
@@ -498,6 +502,7 @@ export default class Boot extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     })
+    //Archer
     this.anims.create({
       key: 'archerMove',
       frames: this.anims.generateFrameNames('archer', { start: 1, end: 6, prefix: 'run', suffix: '.png' }),
@@ -531,7 +536,7 @@ export default class Boot extends Phaser.Scene {
     })
 
 
-    // ice elemental animations
+    // Ice elemental
     this.anims.create({
       key: 'iceElemental_idle',
       frames: this.anims.generateFrameNames('iceElemental', { start: 1, end: 5, suffix: '.png' }),
@@ -556,6 +561,7 @@ export default class Boot extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     })
+    //Mimic Chest
     this.anims.create({
       key: 'mimicChestAttack',
       frames: this.anims.generateFrameNames('mimicChest', { start: 1, end: 4, suffix: '.png' }),
@@ -580,7 +586,7 @@ export default class Boot extends Phaser.Scene {
       frameRate: 10,
       repeat: 0
     })
-
+    //Wizard
     this.anims.create({
       key: 'wizardAttack1',
       frames: this.anims.generateFrameNames('wizardBoss', { start: 0, end: 7, prefix: 'attack',  suffix: '.png' }),
@@ -665,6 +671,7 @@ export default class Boot extends Phaser.Scene {
       frameRate: 10,
       repeat: 0
     })
+    //Ghost
     this.anims.create({
       key: 'ghostBossIdle',
       frames: this.anims.generateFrameNames('ghostBoss', { start: 0, end: 9, prefix: 'idle' , suffix: '.png' }),
@@ -727,14 +734,14 @@ export default class Boot extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     })
-
+    //Fire Ghost
     this.anims.create({
       key: 'fireEnemy',
       frames: this.anims.generateFrameNames('fireEnemy', { start: 0, end: 9, suffix: '.png' }),
       frameRate: 10,
       repeat: -1
     })
-
+    //Boxes
     this.anims.create({
       key: 'boxDestroy',
       frames: this.anims.generateFrameNames('box', { start: 1, end: 7, prefix: 'box_', suffix: '.png' }),
@@ -749,7 +756,7 @@ export default class Boot extends Phaser.Scene {
       repeat: 2,
       yoyo:true
     })
-
+    //Teleport Gate
     this.anims.create({
       key: 'TeleportGate',
       frames: this.anims.generateFrameNames('TeleportGate', {start:1, end:2, prefix:'TeleportGate', suffix: '.png'}),

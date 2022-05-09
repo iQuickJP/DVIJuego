@@ -173,8 +173,8 @@ export default class Player extends Phaser.GameObjects.Container {
     }
   }*/
 
-  progressObject(){
-    this.playerData.progressObject();
+  progressObject(n){
+    this.playerData.progressObject(n);
   }
 
 
@@ -262,7 +262,6 @@ export default class Player extends Phaser.GameObjects.Container {
     if (!somePressed) {
       if (this.body.onFloor()) {
         this.sprite.play('stand', true);
-        this.body.setAccelerationY(0);
       } else {
         this.sprite.play('jump', true);
       }
@@ -271,8 +270,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
   cancelDash(){
     if(this.dashing){
-      this.dashing = false;
-      this.body.setVelocityX(0);
+      this.endDash();
     }
   }
 
@@ -293,6 +291,7 @@ export default class Player extends Phaser.GameObjects.Container {
   }
 
   initiateDash() {
+    this.scene.sound.add('dash').play();
     this.dashing = true;
     this.dashed = true;
     this.body.setVelocity(this.playerData.dashVelocity * this.lastInput, 0);
@@ -304,6 +303,7 @@ export default class Player extends Phaser.GameObjects.Container {
   endDash() {
     this.dashing = false;
     this.body.setVelocityX(0);
+    this.body.setAccelerationY(0);
     this.body.setAllowGravity(true);
   }
 

@@ -32,7 +32,7 @@ export default class GhostBoss extends BossParent {
 
         this.circun = 0.3;
         this.arrowsAttack2 = 5;
-        this.arrowsAttack3 = 2;
+        this.arrowsAttack3 = 1;
         this.attack2Vel = 130;
         this.attack3Vel = 370;
 
@@ -356,7 +356,10 @@ export default class GhostBoss extends BossParent {
 
 
     }
-
+    addColliders(){
+        this.scene.physics.add.collider(this, this.scene.wallLayer,()=>this.isCol());
+        this.scene.physics.add.collider(this, this.scene.voidLayer,()=>this.isCol());
+    }
     createGropus() {
 
 
@@ -388,6 +391,7 @@ export default class GhostBoss extends BossParent {
     }
 
     die(){
+        this.scene.sound.stopAll();
         super.die("ghostBossDie");
     }
 

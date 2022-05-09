@@ -1,18 +1,4 @@
-import HealthPotion from '../../objetos_recogibles/consumibles/healthPotion.js';
 import PlayerTopDown from '../../player/playerTopDown.js';
-import PowerUp from '../../objetos_recogibles/powerUp.js';
-import Coin from '../../objetos_recogibles/consumibles/coin.js';
-import Health from '../../objetos_recogibles/consumibles/health.js';
-import Arrow from '../../objetos_recogibles/consumibles/arrow.js';
-import Bouncy from '../../objetos_recogibles/pasivos/bouncy.js';
-import Minotaur from '../../enemies/minotaur.js';
-import Enemy from '../../enemies/enemy.js';
-import Trabuquero from '../../enemies/trabuquero.js';
-import GoblinKing from '../../enemies/goblinKing.js';
-import Mole from '../../enemies/moleVariante.js';
-import Mole2 from '../../enemies/moleVariante2.js';
-import Chest from '../../objetos_recogibles/chest.js';
-import Archer from '../../enemies/archer.js';
 import Minimap from '../../managers/minimap.js';
 import Box from '../../decoracion/box.js';
 
@@ -90,7 +76,6 @@ export default class LevelParent extends Phaser.Scene {
     this.boxes = [];
     this.closeDoors();
   
-    this.dungeonSound = this.sound.add("dungeontheme").play();
   }
 
 
@@ -158,9 +143,9 @@ export default class LevelParent extends Phaser.Scene {
     this.scene.start("end", {playerData: this.playerData });
   }
   winGame() {
-    this.playerData.win();
+    const power = this.playerData.win();
     this.sound.stopAll();
-    this.scene.start("win", {playerData: this.playerData, powerUpList:this.powerUpList});
+    this.scene.start("win", {playerData: this.playerData, powerUpList:this.powerUpList, power:power});
   }
 
   showHitbox(layer) {

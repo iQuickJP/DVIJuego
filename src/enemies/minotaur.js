@@ -1,5 +1,4 @@
 import ShootingEnemyParent from './shootingEnemyParent.js';
-import Homing_p from '../proyectile/homing_p.js';
 import Basic_projectile from '../proyectile/basic_projectile.js';
 
 /**
@@ -25,6 +24,10 @@ export default class Minotaur extends ShootingEnemyParent {
     this.attackingPreparing = false;
     this.origDrag = 0.0001;
     this.body.setDrag(this.origDrag);
+    this.appearSound= this.scene.sound.add("minotaurAppear",{volume:0.5}).play();
+    this.deathSound1 = this.scene.sound.add("minotaurDeath1");
+    this.deathSound2 = this.scene.sound.add("minotaurDeath2");
+    this.damageSound = this.scene.sound.add("minotaurDamage");
     
     this.cont = 1;
     //this.body.offset.x = -15;
@@ -89,6 +92,8 @@ export default class Minotaur extends ShootingEnemyParent {
       }
     }
     die(){
+      this.deathSound1.play();
+      this.deathSound2.play();
       this.sprite.play('minotaurDeath');
       this.preUpdate = ()=>{};
       this.deadCenter.x = this.centerX();
@@ -99,5 +104,10 @@ export default class Minotaur extends ShootingEnemyParent {
         this.spawnLoot();
         this.destroy();
       })
+    }
+
+    hurt(damage){
+      this.damageSound.play();
+      super.hurt(damage);
     }
 }

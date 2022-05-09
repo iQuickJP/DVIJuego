@@ -1,7 +1,5 @@
-import HealthPotion from '../../objetos_recogibles/consumibles/healthPotion.js';
 import Key from '../../objetos_recogibles/pasivos/key.js';
 import Player from '../../player/player.js';
-import PlayerTopDown from '../../player/playerTopDown.js';
 
 /**
  .
@@ -26,7 +24,7 @@ export default class LevelScroll3 extends Phaser.Scene {
  
     const backgroundLayer = map.createLayer('BackgroundLayer', tileset).setCollisionByProperty({ collides: true })
     this.player = new Player(this, this.coordinates.x, this.coordinates.y, this.playerData);
-    this.key = new Key(this, this.player, 200, 420, 'Key5');
+    this.key = new Key(this, this.player, 200, 420, 'Key5', 'Secret Key 3', 3);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setBounds(0,0,5120,1600);
     const wallLayer = map.createLayer('WallLayer', tileset).setCollisionByProperty({ collides: true });

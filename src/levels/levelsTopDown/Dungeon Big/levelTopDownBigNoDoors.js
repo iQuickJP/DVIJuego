@@ -1,20 +1,4 @@
-import HealthPotion from '../../../objetos_recogibles/consumibles/healthPotion.js';
 import PlayerTopDown from '../../../player/playerTopDown.js';
-import PowerUp from '../../../objetos_recogibles/powerUp.js';
-import Coin from '../../../objetos_recogibles/consumibles/coin.js';
-import Health from '../../../objetos_recogibles/consumibles/health.js';
-import Arrow from '../../../objetos_recogibles/consumibles/arrow.js';
-import Bouncy from '../../../objetos_recogibles/pasivos/bouncy.js';
-import Minotaur from '../../../enemies/minotaur.js';
-import Enemy from '../../../enemies/enemy.js';
-import Trabuquero from '../../../enemies/trabuquero.js';
-import GoblinKing from '../../../enemies/goblinKing.js';
-import Mole from '../../../enemies/moleVariante.js';
-import Mole2 from '../../../enemies/moleVariante2.js';
-import Chest from '../../../objetos_recogibles/chest.js';
-import Archer from '../../../enemies/archer.js';
-import LevelParent from '../levelParent.js';
-import WizardBoss from '../../../enemies/wizardBoss.js';
 import GhostBoss from '../../../enemies/ghostBoss.js';
 import LevelBigParent from './levelBigParent.js';
 
@@ -65,7 +49,7 @@ export default class LevelBigNoDoors extends LevelBigParent {
     this.sceneChange = [];
 
 
-    this.dungeonSound = this.sound.add("dungeontheme").play();
+    this.dungeonSound = this.sound.add("bossTheme", {loop: true}).play();
   }
 
 
@@ -74,7 +58,7 @@ export default class LevelBigNoDoors extends LevelBigParent {
     const map = this.make.tilemap({ key: 'DungeonBigNoDoors', tileWidth: 64, tileHeight: 64 });
     const tileset = map.addTilesetImage('Dungeon64', 'dungeon');
     this.groundLayer = map.createLayer('Ground', tileset);
-    this.innerVoidLayer = map.createLayer('InnerVoid', tileset);
+    this.innerVoidLayer = map.createLayer('InnerVoid', tileset).setCollisionByProperty({ collides: true });
     this.voidLayer = map.createLayer('Void', tileset).setCollisionByProperty({ collides: true });
     this.wallLayer = map.createLayer('Walls', tileset).setCollisionByProperty({ collides: true });
   }
@@ -86,6 +70,10 @@ export default class LevelBigNoDoors extends LevelBigParent {
   onStart(){
       this.cameras.main.startFollow(this.player);
       this.cameras.main.setBounds(0, 0, this.dimensions.x, this.dimensions.y);
+  }
+
+  update() {
+    
   }
 
   actMinimap(){}

@@ -91,6 +91,7 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
       this.bow.wand.setVisible(true);
       this.bow.directionArrow.setVisible(true);
     }
+    if(!this.playerData.arrowHelp) this.bow.directionArrow.setVisible(false);
 
 
     //Barra proyectiles
@@ -132,13 +133,17 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
     this.L2Pressed = false;
     this.upPadPressed = false;
     this.downPadPressed = false;
+    this.startpadPressed = false;
+
 
     //Variables generales
     this.isDead = false;
     this.blocked = false;
+    this.hurting = false;
 
     //Audio
-    this.swordAudio = this.scene.sound.add("slide");
+    this.swordAudio = this.scene.sound.add('slide');
+    this.spellAudio = this.scene.sound.add("throwSpell");
     this.hit = this.scene.sound.add("hit");
     this.upgradeAudio = this.scene.sound.add("upgrade");
     this.flechaAudio = this.scene.sound.add("disparoFlecha");
@@ -168,15 +173,18 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
     this.isMenuDeployed = false;
   }
 
-  preUpdate(t, dt) {
-
-    this.isKeyEscDown = Phaser.Input.Keyboard.JustDown(this.keyEsc);
-    if (!this.isMenuDeployed && this.isKeyEscDown) {
+  controlPauseMenu(){
+    if (!this.isMenuDeployed) {
       this.showMenu();
 
-    } else if (this.isMenuDeployed && this.isKeyEscDown) {
+    } else if (this.isMenuDeployed) {
       this.hideMenu();
     }
+  }
+
+  preUpdate(t, dt) {
+
+    
     if (this.blocked) {
       this.updateUi();
       return;
@@ -206,9 +214,8 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
     if (this.immunity > 0)
       this.immunity -= dt;
     else
-      this.displayColor = () => { };
-
-
+      this.hurting = false;
+      
     this.controls.selectWeapon();
     this.displayColor();
     this.flickerTime += dt;
@@ -216,8 +223,13 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
     if (this.body.velocity.x != 0 || this.body.velocity.y != 0) {
       this.lastVelocity = new Phaser.Math.Vector2(this.body.velocity.x, this.body.velocity.y);
     }
+    
+    if(!this.playerData.arrowHelp) this.bow.directionArrow.setVisible(false);
+    else this.bow.directionArrow.setVisible(true);
+
     this.controls.healthRecovery();
     this.controls.manaRecovery();
+    this.controls.pauseMenuControl();
     //Actualizacion informacion en pantalla
     //this.health_label.text = 'Health: ' + this.playerData.health;
     this.updateUi();
@@ -361,9 +373,9 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
       this.hit.play();
       this.playerData.health -= damage;
       this.immunity = 1500;
-      this.displayColor = this.flickering;
       this.flickerTime = -200;
       this.sprite.tint = 0xff0000;
+      this.hurting = true;
     }
   }
 
@@ -379,6 +391,7 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
   }
 
   spellFire() {
+    this.spellAudio.play();
     const projectileVector = this.controls.projectileAngle();
     this.projectile = new Spell(this.scene, this.x, this.y, projectileVector.x, projectileVector.y, 10, this.playerData.damage);
   }
@@ -392,6 +405,7 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
   }
 
   initiateDash() {
+    this.scene.sound.add('dash',{volume:0.2}).play();
     this.dashVelocity = this.lastVelocity;
     this.dashVelocity.normalize().scale(this.playerData.dashSpeed);
     this.dashing = true;
@@ -515,7 +529,11 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
     }
   }
 
-  displayColor() { }
+  displayColor() { 
+    if(this.hurting){
+      this.flickering();
+    }
+  }
 
   //Creacion Grupos
   createGroups() {
@@ -610,6 +628,9 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
       this.bow.wand.setVisible(true);
       this.bow.directionArrow.setVisible(true);
     }
+
+    if(!this.playerData.arrowHelp) this.bow.directionArrow.setVisible(false);
+
   }
 
   //Controles player
@@ -701,6 +722,11 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
         if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
           this.spellFire();
           this.playerData.mana -= this.playerData.currentManaCost;
+        }
+      },
+      pauseMenuControl: () => {
+        if (Phaser.Input.Keyboard.JustDown(this.keyEsc)) {
+          this.controlPauseMenu();
         }
       }
     };
@@ -805,6 +831,17 @@ export default class PlayerTopDown extends Phaser.GameObjects.Container {
           if (!this.R2_pressed) return;
           this.R2_pressed = false;
         }
+      },
+      pauseMenuControl: () => {
+        const pad = this.scene.input.gamepad.getPad(0);
+        if(pad.buttons[9].pressed){
+          if(this.startpadPressed) return;
+        this.startpadPressed = true;
+        this.controlPauseMenu();
+        }else {
+          this.startpadPressed = false;
+        }
+        
       },
       manaRecovery: () => {
         const pad = this.scene.input.gamepad.getPad(0);

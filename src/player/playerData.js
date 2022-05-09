@@ -1,9 +1,9 @@
-import ProjectileBar from "./projectileBar.js";
+
 export default class PlayerData {
   constructor() {
 
     //Atributos generales
-    this.damage = 1000;
+    this.damage = 7;
     
     this.isPadControlling = false;
     this.progressStory = 0;
@@ -16,10 +16,10 @@ export default class PlayerData {
     this.health = 6;
     this.maxhealth = 6;
     this.money = 10; // dinero del jugador
-    this.healthPotions = 50; // pociones de vida
-    this.manaPotions = 50; // pociones de mana
+    this.healthPotions = 3; // pociones de vida
+    this.manaPotions = 3; // pociones de mana
     this.mana = 0;
-    this.arrows = 100;
+    this.arrows = 20;
     this.maxMana = 100;
 
     //Atributos topdown
@@ -52,6 +52,8 @@ export default class PlayerData {
 
     //UI related
     this.isSoundMuted = false;
+    this.firstDialogBlacksmith = false;
+    this.arrowHelp = true;
 
 
     this.player = null;
@@ -69,15 +71,18 @@ export default class PlayerData {
   }
 
   win(){
+    let power = 0;
     this.wins++;
     if(this.keys > this.progressStory){
       if(this.progressStory < 3){
         this.progressStory++;
         this.unlockPowers(this.progressStory);
+        power = this.progressStory;
       }
     }
     this.keys = 0;
     this.winData();
+    return power;
   }
   die(){
     this.deaths++;
@@ -112,14 +117,14 @@ export default class PlayerData {
   }
 
   restartData(){
-    this.damage = 5;
+    this.damage = 7;
     this.speed = 400;
     this.health = 6;
     this.maxhealth = 6;
     
     if(this.money < 0) this.money = 0; 
-    this.healthPotions = 1; // pociones de vida
-    this.manaPotions = 1; // pociones de mana
+    this.healthPotions = 3; // pociones de vida
+    this.manaPotions = 3; // pociones de mana
     this.mana = 0;
     this.arrows = 20;
     this.projectileBaseSpeed = 500;
@@ -143,8 +148,8 @@ export default class PlayerData {
       this.speed = this.maxSpeed;
     }
   }
-  progressObject(){
-    this.keys++;
+  progressObject(n){
+    this.keys = Math.max(n, this.keys);
   }
   dashCoolDownUp(cant){
     this.dashCoolDown -= cant;
