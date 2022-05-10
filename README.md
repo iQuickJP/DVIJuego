@@ -4,7 +4,7 @@
 
 *Nombre del Grupo:* Knight Studios
 
-![alt text](https://github.com/iquickjp/DVIJuego.github.io/blob/main/ImagenJuego.png)
+![alt text](https://github.com/iQuickJP/DVIJuego/blob/main/ImagenJuego.png)
 
 
 Dirección del juego: https://iquickjp.github.io/DVIJuego/
