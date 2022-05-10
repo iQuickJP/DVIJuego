@@ -4,10 +4,10 @@
 
 *Nombre del Grupo:* Knight Studios
 
-![alt text](https://github.com/BrunoMC102/DVI.github.io/blob/main/ImagenJuego.png)
+![alt text](https://github.com/iquickjp/DVIJuego.github.io/blob/main/ImagenJuego.png)
 
 
-Dirección del juego: https://brunomc102.github.io/DVI.github.io/
+Dirección del juego: https://iquickjp.github.io/DVIJuego/
 
 
 ### IDEA GENERAL
@@ -314,8 +314,7 @@ Respecto al progreso, decidimos retocar todo el apartado de las llaves y cambiam
 
 Finalmente, al boss final le hicimos que redujese la cantidad de ataques por segundo y redujimos la cantidad de proyectiles que lanzaba en cada ataque. 
 
-### PARTICIPACION
-![alt text](https://github.com/BrunoMC102/DVI.github.io/blob/main/participacion.png)
+
 
 
       
