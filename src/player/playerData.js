@@ -3,7 +3,7 @@ export default class PlayerData {
   constructor() {
 
     //Atributos generales
-    this.damage = 7;
+    this.damage = 100;
     
     this.isPadControlling = false;
     this.progressStory = 0;
@@ -13,8 +13,8 @@ export default class PlayerData {
     this.maxSpeed = 750;
 
     //Recursos jugador
-    this.health = 6;
-    this.maxhealth = 6;
+    this.health = 100;
+    this.maxhealth = 100;
     this.money = 10; // dinero del jugador
     this.healthPotions = 3; // pociones de vida
     this.manaPotions = 3; // pociones de mana
@@ -41,9 +41,9 @@ export default class PlayerData {
     //Atributos scroll
     this.scrollSpeed = 400;
     this.dashVelocity = 975;
-    this.doubleJump = false;
-    this.scrollDash = false;
-    this.scrollBoxes = false;
+    this.doubleJump = true;
+    this.scrollDash = true;
+    this.scrollBoxes = true;
     // Aceleraciones vertical y horizontal 
     
     this.hAcc = 2000;
